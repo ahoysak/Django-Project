@@ -1,0 +1,24 @@
+{%  extends 'main/index.html' %}
+{% block title %} Додавання статті {% endblock %}
+
+{% block bodies %}
+<div class="form_for__add">
+    {% if user.is_authenticated %}
+
+        <form method="POST">
+            <h2>Додавання статі</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Додати!</button>
+        </form>
+        <script>
+            var name = "{{ user.id }}";
+            document.getElementById("elder").value = name;
+        </script>
+
+    {% else %}
+        <p>Ви повинні авторизуватись для цієї дії.</p>
+        <p>Зробіть це <a href="{% url 'login' %}" >тут.</a></p>
+    {% endif %}
+</div>
+{% endblock %}

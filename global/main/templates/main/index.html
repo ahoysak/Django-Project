@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Головна Сторінка {% endblock %}</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+
+</head>
+<body>
+    <aside class="sub-menu__global">
+        {% if request.user.is_authenticated %}
+            <div class="left-menu">
+                <a class="left-menu-link"  href="{% url 'home' %}">Головна</a>
+                <a class="left-menu-link"  href="{% url 'new_post' %}">Нова стаття</a>
+                <a class="left-menu-link"  href="">Мої статті</a>
+            </div>
+            <div>  {{ user.first_name}} {{ user.last_name}} </div>
+            <div><a class="left-menu-link" href="{% url 'logout' %}"> Вихід</a></div>
+
+        {% else %}
+            <div class="lleft-menu">
+                <a class="left-menu-link" href="{% url 'home' %}">Головна</a>
+            </div>
+            <div class="rright-menu">
+                <a class="left-menu-link" href="{% url 'register' %}">Реєстрація</a>
+            </div>
+        {% endif %}
+    </aside>
+    {% block bodies %}
+    <h1>Статті від авторів</h1>
+    <div class="form_for__post">
+        {% for post in object_list %}
+            <h2> {{ post.title }}</h2><br>
+            <p>{{ post.text_article }}</p>
+            <ul>
+                <li>Ім.я автора на сайті: {{ post.author }} </li>
+                <li>Категорія: {{ post.category }}</li>
+                <li>Інші статті по темі <a href="{% url 'category' post.category %}">{{ post.category }}</a> </li>
+                {% if post.total_likes == 0 %}
+
+                {% else %}
+                    <li> <i class="fas fa-thumbs-up"></i>  {{ post.total_likes }} </li>
+                {% endif %}
+            </ul>
+        {% if user.is_authenticated %}
+            <p>Перейти до детального <a href="{% url 'post_detail' post.pk %}"> Огляду.</a><a</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+</html>

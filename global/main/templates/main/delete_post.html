@@ -1,0 +1,22 @@
+{%  extends 'main/index.html' %}
+{% block title %} Видалення статті {{ post.title }} {% endblock %}
+
+{% block bodies %}
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <h3>Видалити статтю {{ post.title }}?</h3>
+            <form method="POST" class="delete-post" >
+                {% csrf_token %}
+                <strong>Ви впевнені?</strong><br>
+                <button><a href="/"> Ні </a>  </button>
+                <button>Видалити!</button>
+        {% else %}
+            <p>Ви не можете редагувати чужі пости.</p>
+            <p>Повернутись <a href="{% url 'home' %}" >назад.</a> </p>
+        {% endif %}
+        </form>
+    {% else %}
+        <p>Ви повинні авторизуватись для цієї дії.</p>
+        <p>Зробіть це <a href="{% url 'login' %}" >тут.</a></p>
+    {% endif %}
+{% endblock %}

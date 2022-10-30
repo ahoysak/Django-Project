@@ -1,0 +1,22 @@
+{%  extends 'main/index.html' %}
+{% block title %} Авторизація {% endblock %}
+
+{% block bodies %}
+<div class="sub-forms__login">
+    <h1>Вхід</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="btn-for-login">
+            <input class="input__form" type="text" placeholder="Ваш Нікнейм" name="username">
+        </div><br>
+        <div class="btn-for-login">
+            <input class="input__form" type="password" placeholder="Пароль" name="password">
+        </div>
+        <button class="btn-input__form">Увійти</button>
+    </form>
+    <div class="not-account_user">
+        <p>У вас немає облікового запису?</p>
+            <a class="not-account_user-a" href="{% url 'register'%}">Створити новий обліковий запис</a>
+    </div>
+</div>
+{% endblock %}

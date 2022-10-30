@@ -1,0 +1,103 @@
+body {
+    background: CadetBlue;
+}
+div{
+    font-size: 23px;
+    color: black;
+}
+.center-head, .register, .login, h2{
+    text-align: center;
+}
+input{
+    font-size: 20px;
+}
+.form_for__add{
+    text-align: center;
+    font-size: 25px
+}
+button{
+    font-size: 20px;
+}
+aside {
+    text-align: center;
+    display:flex;
+    justify-content: space-between
+}
+.right-menu{
+    display:flex;
+    column-gap:20px;
+}
+.big-text{
+    font-size: 25px;
+}
+.like{
+    background-color: #80808C;
+}
+.not-like{
+    background-color: #80808C;
+}
+.sub-menu p, a{
+    text-decoration: none;
+}
+.sub-menu__global{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    background: rgb(53,58,65);
+    padding: 0 15px;
+}
+.left-menu{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+.right-menu{
+    display: flex;
+    column-gap: 10px;
+}
+.left-menu-link{
+    font-size: 20px;
+    color: rgb(249,248,249);
+}
+.sub-forms__login{
+    font-size: 27px;
+    text-align: center;
+    padding: 150px;
+}
+.input__form{
+    font-size: 30px;
+}
+.not-account_user{
+    font-size:20px;
+}
+.not-account_user-a{
+    color: #FFA50C;
+}
+.btn-input__form{
+    background-color: #FFA50C;
+    color: black;
+}
+.lleft-menu-link, .right-menu a{
+        color: rgb(121,126,133);
+}
+.form_for__post{
+    padding: 10px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}

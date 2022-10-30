@@ -1,0 +1,20 @@
+{%  extends 'main/index.html' %}
+{% block title %} Редагування статті {{ post.title }} {% endblock %}
+
+{% block bodies %}
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <form method="POST" class="forms">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Додати!</button>
+            </form>
+        {% else %}
+            <p>Ви не можете редагувати чужі пости.</p>
+            <p>Повернутись <a href="{% url 'home' %}" >назад.</a> </p>
+        {% endif %}
+    {% else %}
+        <p>Ви повинні авторизуватись для цієї дії.</p>
+        <p>Зробіть це <a href="{% url 'login' %}" >тут.</a></p>
+    {% endif %}
+{% endblock %}

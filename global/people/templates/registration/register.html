@@ -1,0 +1,14 @@
+{%  extends 'main/index.html' %}
+{% block title %} Реєстрація {% endblock %}
+
+{% block bodies %}
+    <form method="POST" class="forms">
+        <h1>Створення нового облікового запису</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="big-text">
+            <p>Якщо у вас є аккаунт,ви можете авторизуватись <a class="not-account_user-a" href="{%url 'login' %}">тут.</a> </p>
+        </div>
+        <button class="btn-input__form"> Зареєструватись</button>
+    </form>
+{% endblock %}

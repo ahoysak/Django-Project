@@ -1,0 +1,48 @@
+{%  extends 'main/index.html' %}
+{% block title %} {{ post.title }} {% endblock %}
+{% block bodies %}
+    {% if user.is_authenticated %}
+
+            <h2> {{ post.title }}</h2><br>
+            <p>{{ post.text_article }}</p>
+            <ul>
+                <li>Ім.я автора на сайті: {{ post.author }}</li>
+                <li>Ім.я автора: {{ post.author.first_name }} {{ post.author.last_name }}</li>
+                <li>Дата публікації статті : {{ post.post_date }} </li>
+                <li>Категорія: {{post.category }}</li>
+            </ul>
+        {% if user.id == post.author.id %}
+            <aside class="sub-menu">
+                <div class="sub-menu">
+                    <p> <a href="{% url 'update_post' post.pk %}">(Редагувати статтю)</a> </p>
+                </div>
+                <div class="right-choise">
+                    <p><a href="{% url 'delete_post' post.pk %}">(Видалити статтю)</a></p>
+                </div>
+            </aside>
+        {% endif %}
+
+        <form action="{% url 'like_post' post.pk %}" method="post">
+            {% csrf_token %}
+        {% if liked %}
+             {{ total_likes }}
+            <button type="submit" name="post_id" value="{{ post.id }}" class="not-like" ><i class="fas fa-thumbs-up"></i> </button>
+        {% else %}
+            <button type="submit" name="post_id" value="{{ post.id }}" class="like" ><i class="fas fa-thumbs-up"></i></button>
+        {% endif %}
+        <h4>Коментарі</h4>
+            {% if not post.comments.all %}
+                <p>Немає коментарів.<a href="#">додати коментар</a></p>
+            {% else %}
+                {% for comment in post.comments.all %}
+                    {{ comment.name }}<br>
+                    {{ comment.text_comment }}<br>
+                    {{ date_comment }}
+                {% endfor %}
+            {% endif %}
+        </form>
+    {% else %}
+        <p>Ви повинні авторизуватись для цієї дії.</p>
+        <p>Зробіть це <a href="{% url 'login' %}" >тут.</a></p>
+    {% endif %}
+{% endblock %}
